@@ -16,10 +16,6 @@ const ABIsSources = {
 transferRewardToPayoutKey();
 
 async function transferRewardToPayoutKey() {
-	let contractAddresses
-	try { contractAddresses = await getContractsAddresses(network) }
-	catch (err) { return errorFinish(err); }
-	
 	let web3
 	try { web3 = await configureWeb3() }
 	catch (err) { return errorFinish(err); }
@@ -27,11 +23,15 @@ async function transferRewardToPayoutKey() {
 	let miningKey
 	try { miningKey = await findMiningKey() }
 	catch (err) { return errorFinish(err); }
-	if (!miningKey || /*!(web3.utils.isAddress(miningKey)) ||*/ miningKey == "0x0000000000000000000000000000000000000000") {
+	if (!miningKey || !(web3.utils.isAddress(miningKey)) || miningKey == "0x0000000000000000000000000000000000000000") {
 		var err = {code: 500, title: "Error", message: "Mining key is empty"};
 		return errorFinish(err);
 	}
 	console.log("miningKey = " + miningKey)
+
+	let contractAddresses
+	try { contractAddresses = await getContractsAddresses(network) }
+	catch (err) { return errorFinish(err); }
 
 	let KeysManagerAbi
 	try { KeysManagerAbi = await getABI(network, 'KeysManager') }
@@ -44,7 +44,7 @@ async function transferRewardToPayoutKey() {
 	catch (err) { return errorFinish(err); }
 	console.log("payoutKey = " + payoutKey)
 
-	if (!payoutKey || /*!(web3.utils.isAddress(payoutKey)) ||*/ payoutKey == "0x0000000000000000000000000000000000000000") {
+	if (!payoutKey || !(web3.utils.isAddress(payoutKey)) || payoutKey == "0x0000000000000000000000000000000000000000") {
 		var err = {code: 500, title: "Error", message: "Payout key is empty"};
 		return errorFinish(err);
 	}

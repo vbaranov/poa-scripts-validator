@@ -1,20 +1,21 @@
 {
-  "name": "",
-  "version": "1.0.0",
-  "description": "",
-  "devDependencies": {
-    "toml": "^2.3.2",
-    "web3": "^1.0.0-beta.26"
-  },
+  "name": "poa-script-validator-transfer-reward",
+  "version": "2.0.0",
+  "description": "Transfer reward for blocks generation to payout key of validator",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/poanetwork/poa-scripts-validator"
   },
   "keywords": [],
-  "author": "",
+  "author": "POA Network",
   "license": "ISC",
   "bugs": {
     "url": "/issues"
   },
-  "homepage": "#README"
+  "homepage": "#README",
+  "dependencies": {
+    "node-fetch": "^1.7.3",
+    "toml": "^2.3.3",
+    "web3": "^1.0.0-beta.29"
+  }
 }
